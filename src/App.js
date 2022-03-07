@@ -1,56 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
+import { Drumpad } from './features/drumpad/Drumpad';
+
+const baseLink = 'https://s3.amazonaws.com/freecodecamp/drums/';
+const sounds = [
+  ['q', 'Heater-1'],
+  ['w', 'Heater-2'],
+  ['e', 'Heater-3'],
+  ['a', 'Heater-4_1'],
+  ['s', 'Heater-6'],
+  ['d', 'Dsc_Oh'],
+  ['z', 'Kick_n_Hat'],
+  ['x', 'RP4_KICK_1'],
+  ['c', 'Cev_H2']
+];
+
+document.addEventListener('keydown', event => {
+  for (let i = 0; i < sounds.length; i++) {
+    if (event.key === sounds[i][0]) {
+      document.getElementById('current').innerText = sounds[i][1];					
+      document.getElementById(sounds[i][0].toUpperCase()).play();
+      setTimeout(() => {
+        document.getElementById('current').innerText = 'Sounds';
+      }, 500);
+    }
+  }
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="App container" id="drum-machine">
+      <div id="display">
+        <p id="current">Sounds</p>
+        {sounds.map(sound => 
+          <Drumpad
+            sound={baseLink + sound[1] + '.mp3'}
+            keyboardKey={sound[0].toUpperCase()}
+            name={sound[1]}
+          />
+        )}
+      </div>
     </div>
   );
 }
