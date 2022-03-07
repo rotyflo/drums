@@ -18,7 +18,7 @@ const sounds = [
 document.addEventListener('keydown', event => {
   for (let i = 0; i < sounds.length; i++) {
     if (event.key === sounds[i][0]) {
-      document.getElementById('current').innerText = sounds[i][1];					
+      document.getElementById('current').innerText = sounds[i][1];
       document.getElementById(sounds[i][0].toUpperCase()).play();
       setTimeout(() => {
         document.getElementById('current').innerText = 'Sounds';
@@ -32,13 +32,15 @@ function App() {
     <div className="App container" id="drum-machine">
       <div id="display">
         <p id="current">Sounds</p>
-        {sounds.map(sound => 
-          <Drumpad
-            sound={baseLink + sound[1] + '.mp3'}
-            keyboardKey={sound[0].toUpperCase()}
-            name={sound[1]}
-          />
-        )}
+        <div id="pads">
+          {sounds.map(sound =>
+            <Drumpad
+              sound={baseLink + sound[1] + '.mp3'}
+              keyboardKey={sound[0].toUpperCase()}
+              name={sound[1]}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
