@@ -9,9 +9,6 @@ export class Drumpad extends React.Component {
 				onClick={() => {
 					document.getElementById('current').innerText = this.props.name;
 					document.getElementById(this.props.keyboardKey).play();
-					setTimeout(() => {
-						document.getElementById('current').innerText = 'Sounds';
-					}, 500);
 				}}
 			>
 				<audio src={this.props.sound} className="clip" id={this.props.keyboardKey}></audio>

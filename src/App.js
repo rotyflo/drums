@@ -20,9 +20,6 @@ document.addEventListener('keydown', event => {
     if (event.key === sounds[i][0]) {
       document.getElementById('current').innerText = sounds[i][1];
       document.getElementById(sounds[i][0].toUpperCase()).play();
-      setTimeout(() => {
-        document.getElementById('current').innerText = 'Sounds';
-      }, 500);
     }
   }
 });
@@ -31,7 +28,7 @@ function App() {
   return (
     <div className="App container" id="drum-machine">
       <div id="display">
-        <p id="current">Sounds</p>
+        <h1 id="current">Drum Machine</h1>
         <div id="pads">
           {sounds.map(sound =>
             <Drumpad
